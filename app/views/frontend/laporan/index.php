@@ -7,12 +7,12 @@
                     <ol class="flex space-x-2 text-gray-600">
                         <li><a href="#" class="text-sm text-red-600 hover:text-red-700 lg:text-base">WargaLapor</a></li>
                         <li><span class="text-sm text-gray-400 lg:text-base"> &gt; </span></li>
-                        <li><span class="text-sm text-gray-500 lg:text-base">Laporan</span></li>
+                        <li><span class="text-sm text-gray-500 lg:text-base">AJukan Laporan</span></li>
                     </ol>
                 </nav>
             </div>
             <div class="mb-8">
-                <h1 class="text-xl font-extrabold text-red-600 lg:text-2xl">Laporan</h1>
+                <h1 class="text-xl font-extrabold text-red-600 lg:text-2xl">AJukan Laporan</h1>
             </div>
         </div>
         <div class="pb-20 lg:px-40 lg:pb-0">

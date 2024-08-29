@@ -7,12 +7,12 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'wargalapor');
+define('DB_NAME', 'lomba');
 
 
 function adminUrl($path = '')
 {
-    $host = "http://localhost/WargaLapor";
+    $host = "http://localhost/Lomba-Oscar1.O-2024";
     $baseUrl = rtrim($host, '/') . '/' . ltrim($path, '/');
     return $baseUrl;
 }
@@ -35,7 +35,7 @@ function imageUrl($path = '')
 
 function baseUrl($url = NULL)
 {
-    $base_url = 'http://localhost/WargaLapor/public';
+    $base_url = 'http://localhost/Lomba-Oscar1.O-2024/public';
     if ($url != null) {
         return rtrim($base_url, '/') . '/' . ltrim($url, '/');
     } else {
@@ -45,7 +45,7 @@ function baseUrl($url = NULL)
 
 function views($url = NULL)
 {
-    $base_url = 'http://localhost/WargaLapor/app/views/';
+    $base_url = 'http://localhost/Lomba-Oscar1.O-2024/app/views/';
     if ($url != null) {
         return rtrim($base_url, '/') . '/' . ltrim($url, '/') . ".php";
     } else {
