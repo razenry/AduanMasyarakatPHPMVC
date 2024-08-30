@@ -48,6 +48,7 @@
                 </div>
                 <!-- Formulir untuk mengirim laporan -->
                 <form class="p-4 mx-5 bg-white rounded-md shadow-md lg:mx-0">
+                    <h2 class="text-xl text-center text-red-600 font-semibold my-5">Formulir Laporan</h2>
                     <!-- Label untuk lampiran laporan -->
                     <label class="block mb-2 font-medium text-gray-900 " for="file_input">Lampiran Laporan <span class="text-red-600">*</span></label>
                     <div class="mb-5 bg-white rounded">
