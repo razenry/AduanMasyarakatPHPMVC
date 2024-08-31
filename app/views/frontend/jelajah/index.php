@@ -51,7 +51,7 @@
                                     <option value="Serpong Utara">Serpong Utara</option>
                                     <option value="Setu">Setu</option>
                                 </select>
-                                <select name="sort" id="sort" class="block text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50 focus:ring-transparent focus:border-gray-300 w-fit lg:w-1/3">
+                                <select name="sort" id="sort" class="block text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50 focus:ring-transparent focus:border-gray-300 w-fit lg:w-1/3 h-fit">
                                     <option selected="" value="">Terbaru</option>
                                     <option value="">Terlama</option>
                                 </select>
