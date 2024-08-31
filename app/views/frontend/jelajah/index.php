@@ -62,7 +62,7 @@
                     <div class="grid grid-cols-1 gap-5 p-4 rounded shadow-md lg:grid-cols-3">
                         <!-- Card 1 -->
                         <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-64 h-64">
+                            <div class="flex justify-center w-full h-full">
                                 <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
                             </div>
                             <div class="flex flex-col flex-grow w-full">
@@ -84,7 +84,7 @@
                         </a>
                         <!-- Card 2 -->
                         <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-64 h-64">
+                            <div class="flex justify-center w-full h-full">
                                 <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
                             </div>
                             <div class="flex flex-col flex-grow w-full">
@@ -106,7 +106,7 @@
                         </a>
                         <!-- Card 3 -->
                         <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-64 h-64">
+                            <div class="flex justify-center w-full h-full">
                                 <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
                             </div>
                             <div class="flex flex-col flex-grow w-full">
@@ -128,7 +128,7 @@
                         </a>
                         <!-- Card 4 -->
                         <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-64 h-64">
+                            <div class="flex justify-center w-full h-full">
                                 <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
                             </div>
                             <div class="flex flex-col flex-grow w-full">

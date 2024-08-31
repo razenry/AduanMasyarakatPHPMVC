@@ -169,12 +169,18 @@
                         <!-- Bagian untuk opsi privasi -->
                         <div class="flex items-center gap-x-5">
                             <div class="flex items-center gap-x-5">
+
+
+                                <div class="flex items-center">
+
+                                </div>
+
                                 <!-- Opsi untuk laporan anonim -->
                                 <div class="group">
-                                    <button class="group-hover:cursor-pointer" data-tooltip-target="tooltip-anonim" type="button">
-                                        <input id="anonim" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded shadow focus:ring-0 group-hover:cursor-pointer">
-                                        <label for="anonim" class="text-sm font-medium text-gray-900 group-hover:cursor-pointer">Anonim</label>
-                                    </button>
+                                        <button class="group-hover:cursor-pointer" data-tooltip-target="tooltip-anonim" type="button">
+                                            <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent ">
+                                            <label for="default-radio-1" class=" text-sm font-medium text-gray-900 dark:text-gray-300">Anonim</label>
+                                        </button>
                                     <!-- Tooltip untuk opsi anonim -->
                                     <div id="tooltip-anonim" role="tooltip" class="absolute z-10 invisible inline-block w-1/3 px-3 py-2 text-sm font-medium text-center text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
                                         Nama Anda tidak akan tercantum di laporan
@@ -184,8 +190,8 @@
                                 <!-- Opsi untuk laporan rahasia -->
                                 <div class="group">
                                     <button class="group:hover:cursor-pointer" data-tooltip-target="tooltip-rahasia" type="button">
-                                        <input id="rahasia" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded shadow focus:ring-0 group-hover:cursor-pointer">
-                                        <label for="rahasia" class="text-sm font-medium text-gray-900 group-hover:cursor-pointer">Rahasia</label>
+                                        <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent ">
+                                        <label for="default-radio-2" class=" text-sm font-medium text-gray-900 dark:text-gray-300">Rahasia</label>
                                     </button>
                                     <!-- Tooltip untuk opsi rahasia -->
                                     <div id="tooltip-rahasia" role="tooltip" class="absolute z-10 invisible inline-block w-1/3 px-3 py-2 text-sm font-medium text-center text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">

@@ -85,6 +85,88 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div id="aduan-list" class="relative flex flex-col transition duration-300 bg-white border rounded-lg shadow cursor-pointer lg:flex-row hover:bg-gray-50" onclick="goToDetail('LGWP14376928')">
+                                <div class="flex-none w-full lg:w-36">
+                                    <a href="https://laporgub.jatengprov.go.id/detail/LGWP14376928">
+                                        <img src="/storage/complaint/2024-08-28/2408281550275.png" class="object-cover w-full rounded-t-lg h-36 lg:rounded-none" alt="image card">
+                                    </a>
+                                </div>
+                                <div class="flex-1 p-4">
+                                    <a href="https://laporgub.jatengprov.go.id/detail/LGWP14376928">
+                                        <p class="text-sm font-semibold text-red-600">LGWP14376928</p>
+                                        <p class="text-sm text-gray-500">Kecamatan Serpong, 28 Agustus 2024</p>
+                                        <p class="mt-2 text-sm text-gray-700">nyoba apakah aplikasi ini masih berfungsi atau tidak</p>
+                                    </a>
+                                    <div class="flex flex-wrap gap-2 mt-3">
+                                        <span class="px-2 py-1 text-sm text-red-600 bg-red-100 rounded-full">Tidak Layak</span>
+                                        <span class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded-full">Anonim</span>
+                                        <span class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded-full">Rahasia</span>
+                                    </div>
+                                </div>
+
+                                <!-- Dropdown button -->
+                                <button id="dropdownButton" data-dropdown-toggle="dropdown" class="absolute top-5 right-5 text-white bg-red-700 rounded-lg text-sm p-1.5 shadow-md" type="button">
+                                    <span class="sr-only">Open dropdown</span>
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div id="dropdown" class="absolute hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow top-10 right-2 w-fit">
+                                    <ul class="py-2" aria-labelledby="dropdownButton">
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Ubah Laporan</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Publish Laporan</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus Laporan</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="aduan-list" class="relative flex flex-col transition duration-300 bg-white border rounded-lg shadow cursor-pointer lg:flex-row hover:bg-gray-50" onclick="goToDetail('LGWP14376928')">
+                                <div class="flex-none w-full lg:w-36">
+                                    <a href="https://laporgub.jatengprov.go.id/detail/LGWP14376928">
+                                        <img src="/storage/complaint/2024-08-28/2408281550275.png" class="object-cover w-full rounded-t-lg h-36 lg:rounded-none" alt="image card">
+                                    </a>
+                                </div>
+                                <div class="flex-1 p-4">
+                                    <a href="https://laporgub.jatengprov.go.id/detail/LGWP14376928">
+                                        <p class="text-sm font-semibold text-red-600">LGWP14376928</p>
+                                        <p class="text-sm text-gray-500">Kecamatan Serpong, 28 Agustus 2024</p>
+                                        <p class="mt-2 text-sm text-gray-700">nyoba apakah aplikasi ini masih berfungsi atau tidak</p>
+                                    </a>
+                                    <div class="flex flex-wrap gap-2 mt-3">
+                                        <span class="px-2 py-1 text-sm text-red-600 bg-red-100 rounded-full">Tidak Layak</span>
+                                        <span class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded-full">Anonim</span>
+                                        <span class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded-full">Rahasia</span>
+                                    </div>
+                                </div>
+
+                                <!-- Dropdown button -->
+                                <button id="dropdownButton" data-dropdown-toggle="dropdown" class="absolute top-5 right-5 text-white bg-red-700 rounded-lg text-sm p-1.5 shadow-md" type="button">
+                                    <span class="sr-only">Open dropdown</span>
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div id="dropdown" class="absolute hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow top-10 right-2 w-fit">
+                                    <ul class="py-2" aria-labelledby="dropdownButton">
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Ubah Laporan</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Publish Laporan</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Hapus Laporan</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

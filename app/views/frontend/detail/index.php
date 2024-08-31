@@ -195,7 +195,7 @@
                             </div>
 
                             <div class="col-span-1 justify-self-end">
-                                <span class="px-2 py-1 text-sm rounded-full bg-cyan-100 text-cyan-600">Diverifikasi</span>
+                                <span class="px-2 py-1 text-sm rounded-full bg-gray-100 text-gray-600">Anonim</span>
                                 <span class="px-2 py-1 text-sm text-gray-600 bg-gray-100 rounded-full">Publik</span>
                             </div>
                         </div>

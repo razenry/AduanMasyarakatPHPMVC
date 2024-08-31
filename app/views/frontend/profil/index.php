@@ -37,7 +37,7 @@
 
                                         <div class="flex flex-col items-center lg:items-start">
                                             <!-- Tombol Ubah Foto Profil -->
-                                            <button @click="$refs.fileInput.click()" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 w-fit" type="button">Ubah Foto Profil</button>
+                                            <button @click="$refs.fileInput.click()" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 w-fit mb-2" type="button">Ubah Foto Profil</button>
                                             <input x-ref="fileInput" accept="image/jpeg, image/jpg, image/png" type="file" class="hidden" @change="addFiles($event)">
                                             <!-- Pesan jenis file -->
                                             <p class="text-sm text-center lg:text-left">Format yang didukung: JPEG, JPG, atau PNG.</p>
@@ -140,20 +140,36 @@
                     <h3 class="mb-4 text-xl font-semibold dark:text-white">Ubah Kata Sandi</h3>
                     <form action="#">
                         <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-6 lg:col-span-3">
-                                <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi Lama</label>
-                                <input type="text" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required>
+                            <!-- Input Kata Sandi Lama -->
+                            <div class="relative col-span-6 lg:col-span-3">
+                                <label for="oldPassword" class="block mb-2 text-sm font-medium text-gray-900">Kata Sandi Lama</label>
+                                <input type="password" name="oldPassword" id="oldPassword" placeholder="••••••••"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10"
+                                    required>
+                                <!-- Eye Icon -->
+                                <i id="toggleOldPassword" class="absolute right-0 flex items-center pr-3 text-gray-500 cursor-pointer inset-y-13 fas fa-eye-slash"></i>
                             </div>
-                            <div class="col-span-6 lg:col-span-3">
-                                <div class="col-span-6 lg:col-span-3">
-                                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi Baru</label>
-                                    <input type="text" name="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required>
-                                </div>
+
+                            <!-- Input Kata Sandi Baru -->
+                            <div class="relative col-span-6 lg:col-span-3">
+                                <label for="newPassword" class="block mb-2 text-sm font-medium text-gray-900">Kata Sandi Baru</label>
+                                <input type="password" name="newPassword" id="newPassword" placeholder="••••••••"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10"
+                                    required>
+                                <!-- Eye Icon -->
+                                <i id="toggleNewPassword" class="absolute right-0 flex items-center pr-3 text-gray-500 cursor-pointer inset-y-13 fas fa-eye-slash"></i>
                             </div>
-                            <div class="col-span-6 lg:col-span-3">
-                                <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi Kata Sandi</label>
-                                <input type="text" name="confirm-password" id="confirm-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required>
+
+                            <!-- Input Konfirmasi Kata Sandi -->
+                            <div class="relative col-span-6 lg:col-span-3">
+                                <label for="confirmPassword" class="block mb-2 text-sm font-medium text-gray-900">Konfirmasi Kata Sandi</label>
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••••"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10"
+                                    required>
+                                <!-- Eye Icon -->
+                                <i id="toggleConfirmPassword" class="absolute right-0 flex items-center pr-3 text-gray-500 cursor-pointer inset-y-13 fas fa-eye-slash"></i>
                             </div>
+
                             <div class="col-span-6 lg:col-full">
                                 <button class="text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Simpan</button>
                             </div>
@@ -165,3 +181,27 @@
         </div>
     </section>
 </main>
+
+<!-- Script untuk tombol tampilkan password -->
+<script>
+    // Fungsi untuk toggle visibility password
+    function togglePasswordVisibility(inputId, toggleId) {
+        const passwordInput = document.getElementById(inputId);
+        const toggleIcon = document.getElementById(toggleId);
+
+        toggleIcon.addEventListener('click', function() {
+            // Ubah tipe input antara 'password' dan 'text'
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Ubah ikon mata berdasarkan tipe input
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+    }
+
+    // Menambahkan event listener ke setiap input password dan toggle icon
+    togglePasswordVisibility('oldPassword', 'toggleOldPassword');
+    togglePasswordVisibility('newPassword', 'toggleNewPassword');
+    togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
+</script>

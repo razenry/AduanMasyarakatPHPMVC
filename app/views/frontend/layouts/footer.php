@@ -130,12 +130,15 @@
             </div>
             <!-- Link Navigasi -->
             <div class="flex items-center justify-center">
-                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-600 gap-x-3 sm:text-base">
+                <ul class="flex flex-wrap items-center mb-6 text-xs font-medium text-gray-600 gap-x-3 sm:text-base">
                     <li>
                         <a href="#" class="hover:underline">Beranda</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline">Tentang Kami</a>
+                        <a href="#" class="hover:underline">Ajukan Laporan</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">LaporanKu</a>
                     </li>
                     <li>
                         <a href="#" class="hover:underline">Jelajah Laporan</a>
