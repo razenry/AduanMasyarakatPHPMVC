@@ -24,7 +24,7 @@
 
 <!-- Skrip kustom -->
 <!-- Menggunakan skrip kustom untuk mengatur fungsionalitas website -->
-<script src="<?= baseUrl('js/main.js') ?>"></script>
+<script src="<?= Routes::public("js/main.js") ?>"></script>
 
 </body>
 

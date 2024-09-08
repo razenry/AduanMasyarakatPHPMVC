@@ -2,11 +2,10 @@
 // Data yang Anda miliki
 $user = $data['user'];
 
-$username = $user['username'];
 $nama = $user['nama'];
 $email = $user['email'];
-$role = $user['role'];
-$motivation = $data['motivation'];
+$role = $user['level'];
+$foto = $user['foto'];
 
 // Memisahkan nama berdasarkan spasi
 $namaArray = explode(' ', $nama);
@@ -20,19 +19,19 @@ $namaDepan = isset($namaArray[0]) ? $namaArray[0] : '';
     <div class="card">
         <div class="card-header">
             <div class="header-title">
-                <h4 class="card-title">Profile</h4>
+                <h4 class="card-title">Profil</h4>
             </div>
         </div>
         <div class="card-body">
             <div class="text-center">
                 <div class="user-profile">
-                    <img src="<?= baseUrl('assets/images/avatars/01.png') ?>" alt="profile-img"
+                    <img src="<?= Routes::storage('users/' . $foto ) ?>" alt="profile-img"
                         class="rounded-pill avatar-130 img-fluid">
                 </div>
                 <div class="mt-3">
                     <h3 class="d-inline-block"><?= $namaDepan ?></h3>
                     <p class="d-inline-block pl-3"> - <?= $role ?></p>
-                    <p class="mb-0"><?= $motivation ?></p>
+                    <p class="mb-0"><?= ExtendsHelper::getMotivation() ?></p>
                 </div>
             </div>
         </div>
@@ -40,7 +39,7 @@ $namaDepan = isset($namaArray[0]) ? $namaArray[0] : '';
     <div class="card">
         <div class="card-header">
             <div class="header-title">
-                <h4 class="card-title">About User</h4>
+                <h4 class="card-title">Tentang Pengguna</h4>
             </div>
         </div>
         <div class="card-body">

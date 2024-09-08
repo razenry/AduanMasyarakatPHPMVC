@@ -1,33 +1,23 @@
 <?php
 
 $user = $data['user'];
-
-$username = $user['username'];
-$nama = $user['nama'];
+$title = $data['title'];
 $email = $user['email'];
-$role = $user['role'];
+$level = $user['level'];
 ?>
 
 <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
     <div class="sidebar-header d-flex align-items-center justify-content-start">
-        <a href="<?= baseUrl("admin/index") ?>" class="navbar-brand">
+        <a href="<?= Routes::base("admin/index") ?>" class="navbar-brand">
 
             <!--Logo start-->
             <div class="logo-main">
                 <div class="logo-normal">
-                    <svg class=" icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                            transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                        <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
-                            fill="currentColor" />
-                        <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                            transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
-                        <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                            transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                    </svg>
+                    <i class="fa-solid fa-envelope icon-30 fs-1"></i>
+
                 </div>
                 <div class="logo-mini">
-                    <svg class=" icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- <svg class=" icon-30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
                             transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
                         <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
@@ -36,15 +26,13 @@ $role = $user['role'];
                             transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
                         <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
                             transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                    </svg>
+                    </svg> -->
                 </div>
             </div>
             <!--logo End-->
-
-
-
-
-            <h4 class="logo-title">Wimcycle</h4>
+            <h4 class="logo-title fw-bold">
+                Warga<span class="text-danger fw-bold">Lapor!</span>
+            </h4>
         </a>
         <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
             <i class="icon">
@@ -63,13 +51,13 @@ $role = $user['role'];
             <!-- Sidebar Menu Start -->
             <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
                 <li class="nav-item static-item">
-                    <a class="nav-link static-item disabled" href="<?= baseUrl("admin") ?>" tabindex="-1">
+                    <a class="nav-link static-item disabled" href="<?= Routes::base("admin") ?>" tabindex="-1">
                         <span class="default-icon">Home</span>
                         <span class="mini-icon">-</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?= baseUrl("admin") ?>">
+                    <a class="nav-link <?php if (isset($data['title']) && $data['title'] === "Dashboard") echo "active"; ?>" aria-current="page" href="<?= Routes::base("admin") ?>">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                 class="icon-20">
@@ -84,146 +72,49 @@ $role = $user['role'];
                         <span class="item-name">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item static-item mt-3">
+                <!-- <li class="nav-item static-item mt-3">
                     <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                        <span class="default-icon">Pages</span>
+                        <span class="default-icon"></span>
                         <span class="mini-icon">-</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#page" role="button"
-                        aria-expanded="false" aria-controls="horizontal-menu">
-                        <i class="icon">
-
-                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M17.1801 4.41C17.1801 3.08 18.2601 2 19.5901 2C20.9201 2 22.0001 3.08 22.0001 4.41C22.0001 5.74 20.9201 6.82 19.5901 6.82C18.2601 6.82 17.1801 5.74 17.1801 4.41ZM13.33 14.7593L16.22 11.0303L16.18 11.0503C16.34 10.8303 16.37 10.5503 16.26 10.3003C16.151 10.0503 15.91 9.8803 15.651 9.8603C15.38 9.8303 15.111 9.9503 14.95 10.1703L12.531 13.3003L9.76 11.1203C9.59 10.9903 9.39 10.9393 9.19 10.9603C8.991 10.9903 8.811 11.0993 8.69 11.2593L5.731 15.1103L5.67 15.2003C5.5 15.5193 5.58 15.9293 5.88 16.1503C6.02 16.2403 6.17 16.3003 6.34 16.3003C6.571 16.3103 6.79 16.1893 6.93 16.0003L9.44 12.7693L12.29 14.9103L12.38 14.9693C12.7 15.1393 13.1 15.0603 13.33 14.7593ZM15.45 3.7803C15.41 4.0303 15.39 4.2803 15.39 4.5303C15.39 6.7803 17.21 8.5993 19.45 8.5993C19.7 8.5993 19.94 8.5703 20.19 8.5303V16.5993C20.19 19.9903 18.19 22.0003 14.79 22.0003H7.401C4 22.0003 2 19.9903 2 16.5993V9.2003C2 5.8003 4 3.7803 7.401 3.7803H15.45Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Manage Page</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </i>
-                    </a>
-                    <ul class="sub-nav collapse" id="page" data-bs-parent="#sidebar-menu">
-                        <li class="nav-item">
-                            <a class="nav-link " href="<?= baseUrl("slide") ?>">
-                                <i class="icon fa-solid fa-images"></i>
-                                <i class="sidenav-mini-icon fa-solid fa-images"></i>
-                                <span class="item-name"> Slide </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item mt-3">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#tool" role="button"
-                        aria-expanded="false" aria-controls="horizontal-menu">
-                        <i class="icon fa-solid fa-gear"></i>
-                        <span class="item-name">Tools</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </i>
-                    </a>
-                    <ul class="sub-nav collapse" id="tool" data-bs-parent="#sidebar-menu">
-
-                        <li class="nav-item">
-                            <a class="nav-link " href="../dashboard/index-dual-horizontal.html">
-                                <i class="icon fa-solid fa-droplet"></i>
-                                <i class="icon fa-solid fa-droplet sidenav-mini-icon"></i>
-
-                                <span class="item-name">Colors</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="nav-item static-item mt-3">
-                    <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                        <span class="default-icon">Product</span>
-                        <span class="mini-icon">-</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu" role="button"
-                        aria-expanded="false" aria-controls="horizontal-menu">
-                        <i class="icon">
-
-                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M17.1801 4.41C17.1801 3.08 18.2601 2 19.5901 2C20.9201 2 22.0001 3.08 22.0001 4.41C22.0001 5.74 20.9201 6.82 19.5901 6.82C18.2601 6.82 17.1801 5.74 17.1801 4.41ZM13.33 14.7593L16.22 11.0303L16.18 11.0503C16.34 10.8303 16.37 10.5503 16.26 10.3003C16.151 10.0503 15.91 9.8803 15.651 9.8603C15.38 9.8303 15.111 9.9503 14.95 10.1703L12.531 13.3003L9.76 11.1203C9.59 10.9903 9.39 10.9393 9.19 10.9603C8.991 10.9903 8.811 11.0993 8.69 11.2593L5.731 15.1103L5.67 15.2003C5.5 15.5193 5.58 15.9293 5.88 16.1503C6.02 16.2403 6.17 16.3003 6.34 16.3003C6.571 16.3103 6.79 16.1893 6.93 16.0003L9.44 12.7693L12.29 14.9103L12.38 14.9693C12.7 15.1393 13.1 15.0603 13.33 14.7593ZM15.45 3.7803C15.41 4.0303 15.39 4.2803 15.39 4.5303C15.39 6.7803 17.21 8.5993 19.45 8.5993C19.7 8.5993 19.94 8.5703 20.19 8.5303V16.5993C20.19 19.9903 18.19 22.0003 14.79 22.0003H7.401C4 22.0003 2 19.9903 2 16.5993V9.2003C2 5.8003 4 3.7803 7.401 3.7803H15.45Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Manage Product</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </i>
-                    </a>
-                    <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar-menu">
-                        <li class="nav-item">
-                            <a class="nav-link " href="<?= baseUrl("bicycle") ?>">
-                                <i class="icon fa-solid fa-bicycle"></i>
-                                <i class="fa-solid fa-bicycle sidenav-mini-icon"></i>
-                                <span class="item-name"> Bicycles </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="<?= baseUrl("category") ?>">
-                                <i class="icon fa-solid fa-list"></i>
-                                <i class="fa-solid fa-list sidenav-mini-icon"></i>
-                                <span class="item-name">Categories</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                </li> -->
+                <?php if ($level == "Admin") : ?>
+                    <li class="nav-item mt-3">
+                        <a class="nav-link " data-bs-toggle="collapse" href="#user" role="button" aria-expanded="false" aria-controls="horizontal-menu">
+                            <i class="icon fa-sharp fa-solid fa-database"></i>
+                            <span class="item-name">Master Data </span>
+                            <i class="right-icon">
+                                <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </i>
+                        </a>
+                        <ul class="sub-nav collapse mt-1" id="user" data-bs-parent="#sidebar-menu">
+                            <li class="nav-item mt-2">
+                                <a class="nav-link <?php if (isset($data['title']) && $data['title'] === "Pengguna") echo "active"; ?>" href="<?= Routes::base("user") ?>">
+                                    <i class="icon fa-duotone fa-solid fa-users"></i>
+                                    <i class="sidenav-mini-icon fa-duotone fa-solid fa-users"></i>
+                                    <span class="item-name"> Pengguna </span>
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <a class="nav-link <?php if (isset($data['title']) && $data['title'] === "Petugas") echo "active"; ?>" href="<?= Routes::base("petugas") ?>">
+                                    <i class="icon fa-solid fa-user-tie"></i>
+                                    <i class="sidenav-mini-icon fa-solid fa-user-tie"></i>
+                                    <span class="item-name"> Petugas </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
                 <li class="nav-item mt-3">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#horizontal-menu2" role="button"
-                        aria-expanded="false" aria-controls="horizontal-menu">
-                        <i class="icon fa-solid fa-screwdriver-wrench"></i>
-                        <span class="item-name">Spareparts</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </i>
+                    <a class="nav-link <?php if (isset($data['title']) && $data['title'] === "Laporan") echo "active"; ?>" aria-current="page" href="<?= Routes::base("dataLaporan") ?>">
+                        <i class="icon fa-solid fa-message"></i>
+                        <span class="item-name">Laporan</span>
                     </a>
-                    <ul class="sub-nav collapse" id="horizontal-menu2" data-bs-parent="#sidebar-menu">
-                        <li class="nav-item">
-                            <a class="nav-link " href="../dashboard/index-horizontal.html">
-                                <i class="icon fa-solid fa-gear"></i>
-                                <i class="fa-solid fa-gear sidenav-mini-icon"></i>
-                                <span class="item-name"> Components </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="../dashboard/index-dual-horizontal.html">
-                                <i class="icon fa-solid fa-droplet"></i>
-                                <i class="icon fa-solid fa-droplet sidenav-mini-icon"></i>
-
-                                <span class="item-name">Colors</span>
-                            </a>
-                        </li>
-
-                    </ul>
                 </li>
             </ul>
             <!-- Sidebar Menu End -->
@@ -231,40 +122,20 @@ $role = $user['role'];
     </div>
     <div class="sidebar-footer"></div>
 </aside>
-<main class="main-content">
+<main class="main-content ">
     <div class="position-relative iq-banner">
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
             <div class="container-fluid navbar-inner">
-                <a href="<?= baseUrl("admin/index") ?>" class="navbar-brand">
+                <a href="<?= Routes::base("admin/index") ?>" class="navbar-brand">
 
                     <!--Logo start-->
                     <div class="logo-main">
                         <div class="logo-normal">
-                            <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                                    transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                                <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                                    transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
-                                <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                                    transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
-                                <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                                    transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                            </svg>
+                            <i class="fa-solid fa-envelope icon-30 fs-1 text-primary"></i>
                         </div>
                         <div class="logo-mini">
-                            <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                                    transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                                <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                                    transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
-                                <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                                    transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
-                                <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                                    transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                            </svg>
+                            <i class="fa-solid fa-envelope icon-30 fs-1"></i>
                         </div>
                     </div>
                     <!--logo End-->
@@ -272,7 +143,9 @@ $role = $user['role'];
 
 
 
-                    <h4 class="logo-title">Hope UI</h4>
+                    <h4 class="logo-title">
+                        Warga<span class="text-danger fw-bold">Lapor!</span>
+                    </h4>
                 </a>
                 <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                     <i class="icon">
@@ -297,28 +170,25 @@ $role = $user['role'];
                         <li class="nav-item dropdown">
                             <a class="py-0 nav-link d-flex align-items-center" href="" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?= baseUrl('assets/images/avatars/01.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/01.png') ?>" alt="User-Profile"
                                     class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-                                <img src="<?= baseUrl('assets/images/avatars/avtar_1.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/avtar_1.png') ?>" alt="User-Profile"
                                     class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
-                                <img src="<?= baseUrl('assets/images/avatars/avtar_2.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/avtar_2.png') ?>" alt="User-Profile"
                                     class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
-                                <img src="<?= baseUrl('assets/images/avatars/avtar_4.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/avtar_4.png') ?>" alt="User-Profile"
                                     class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
-                                <img src="<?= baseUrl('assets/images/avatars/avtar_5.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/avtar_5.png') ?>" alt="User-Profile"
                                     class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
-                                <img src="<?= baseUrl('assets/images/avatars/avtar_3.png') ?>" alt="User-Profile"
+                                <img src="<?= Routes::public('assets/images/avatars/avtar_3.png') ?>" alt="User-Profile"
                                     class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                                 <div class="caption ms-3 d-none d-md-block ">
-                                    <h6 class="mb-0 caption-title"><?= $nama ?></h6>
-                                    <p class="mb-0 caption-sub-title"><?= $role ?></p>
+                                    <h6 class="mb-0 caption-title"><?= $email ?></h6>
+                                    <p class="mb-0 caption-sub-title"><?= $level ?></p>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="<?= baseUrl('admin/profile') ?>">Profile</a></li>
-                                <li><a class="dropdown-item"
-                                        href="<?= baseUrl('dashboard/app/user-privacy-setting.html') ?>">Privacy
-                                        Setting</a></li>
+                                <li><a class="dropdown-item" href="<?= Routes::base('admin/profile') ?>">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -329,10 +199,43 @@ $role = $user['role'];
                 </div>
             </div>
         </nav> <!-- Nav Header Component Start -->
-        <div class="iq-navbar-header" style="height: 80px;">
-            <div class="container-fluid iq-container">
-
+        <!-- <div class="iq-navbar-header">
+            <div class="container iq-container">
+                
             </div>
-        </div> <!-- Nav Header Component End -->
-        <!--Nav End-->
+        </div> Nav Header Component End 
+        Nav End-->
+        <div class="iq-navbar-header mb-3">
+            <div class="iq-navbar-header">
+                <div class="container iq-container">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <?php foreach ($data['breadcrumb'] as $name => $link) : ?>
+                                        <?php if (is_array($link)) : ?>
+                                            <li class="breadcrumb-item <?= $link['status'] == 'active' ? 'active' : '' ?>" aria-current="page">
+                                                <?php if ($link['status'] !== 'active') : ?>
+                                                    <a href="<?= Routes::base($link['link']) ?>"><?= $name ?></a>
+                                                <?php else : ?>
+                                                    <?= $name ?>
+                                                <?php endif; ?>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="breadcrumb-item <?= empty($link) ? 'active' : 'text-dark' ?>" <?= empty($link) ? 'aria-current="page"' : '' ?>>
+                                                <?php if (!empty($link)) : ?>
+                                                    <a href="<?= Routes::base($link) ?>"><?= $name ?></a>
+                                                <?php else : ?>
+                                                    <?= $name ?>
+                                                <?php endif; ?>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>

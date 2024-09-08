@@ -1,1 +1,222 @@
+Berikut adalah kamus SQL yang mencakup pembuatan tabel dan perintah CRUD (Create, Read, Update, Delete) untuk fitur-fitur yang telah dirancang:
 
+### 1. **Membuat Tabel**
+
+#### **1.1 Tabel Users**
+```sql
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    full_name VARCHAR(100),
+    role ENUM('User', 'Petugas', 'Admin') NOT NULL,
+    status ENUM('Active', 'Inactive') DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+**Penjelasan:**
+- `user_id`: ID unik untuk setiap pengguna.
+- `username`: Nama pengguna unik.
+- `password`: Kata sandi terenkripsi.
+- `email`: Email unik pengguna.
+- `full_name`: Nama lengkap pengguna.
+- `role`: Peran pengguna, bisa `User`, `Petugas`, atau `Admin`.
+- `status`: Status pengguna, bisa `Active` atau `Inactive`.
+- `created_at`, `updated_at`: Waktu pembuatan dan pembaruan data.
+
+#### **1.2 Tabel Reports**
+```sql
+CREATE TABLE Reports (
+    report_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    status ENUM('Pending', 'In Progress', 'Resolved', 'Rejected') DEFAULT 'Pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+```
+**Penjelasan:**
+- `report_id`: ID unik untuk setiap laporan.
+- `user_id`: ID pengguna yang membuat laporan (menghubungkan ke tabel `Users`).
+- `title`: Judul laporan.
+- `description`: Deskripsi laporan.
+- `status`: Status laporan, default-nya `Pending`.
+- `deleted_at`: Menyimpan waktu penghapusan laporan untuk soft delete.
+- `created_at`, `updated_at`: Waktu pembuatan dan pembaruan data.
+
+#### **1.3 Tabel ReportHistory**
+```sql
+CREATE TABLE ReportHistory (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    report_id INT,
+    status ENUM('Pending', 'In Progress', 'Resolved', 'Rejected') NOT NULL,
+    changed_by INT,
+    change_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (report_id) REFERENCES Reports(report_id),
+    FOREIGN KEY (changed_by) REFERENCES Users(user_id)
+);
+```
+**Penjelasan:**
+- `history_id`: ID unik untuk setiap riwayat perubahan status laporan.
+- `report_id`: ID laporan yang berubah status (menghubungkan ke tabel `Reports`).
+- `status`: Status laporan pada saat tertentu.
+- `changed_by`: ID pengguna yang mengubah status laporan.
+- `change_date`: Waktu perubahan status.
+
+#### **1.4 Tabel RejectionRequests**
+```sql
+CREATE TABLE RejectionRequests (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    report_id INT,
+    requested_by INT,
+    reason TEXT NOT NULL,
+    status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (report_id) REFERENCES Reports(report_id),
+    FOREIGN KEY (requested_by) REFERENCES Users(user_id)
+);
+```
+**Penjelasan:**
+- `request_id`: ID unik untuk setiap permintaan penolakan.
+- `report_id`: ID laporan yang diminta untuk ditolak (menghubungkan ke tabel `Reports`).
+- `requested_by`: ID petugas yang meminta penolakan laporan.
+- `reason`: Alasan penolakan.
+- `status`: Status permintaan penolakan, default-nya `Pending`.
+
+#### **1.5 Tabel Responses**
+```sql
+CREATE TABLE Responses (
+    response_id INT AUTO_INCREMENT PRIMARY KEY,
+    report_id INT,
+    user_id INT,
+    response_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (report_id) REFERENCES Reports(report_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+```
+**Penjelasan:**
+- `response_id`: ID unik untuk setiap tanggapan.
+- `report_id`: ID laporan yang ditanggapi (menghubungkan ke tabel `Reports`).
+- `user_id`: ID pengguna yang memberikan tanggapan.
+- `response_text`: Teks tanggapan.
+- `created_at`, `updated_at`: Waktu pembuatan dan pembaruan tanggapan.
+
+### 2. **CRUD Operations**
+
+#### **2.1 CRUD pada Tabel Users**
+
+- **Create (Menambahkan Pengguna):**
+  ```sql
+  INSERT INTO Users (username, password, email, full_name, role, status)
+  VALUES ('john_doe', 'encrypted_password', 'john@example.com', 'John Doe', 'User', 'Active');
+  ```
+
+- **Read (Melihat Data Pengguna):**
+  ```sql
+  SELECT * FROM Users WHERE user_id = 1;
+  ```
+
+- **Update (Mengubah Data Pengguna):**
+  ```sql
+  UPDATE Users 
+  SET email = 'new_email@example.com', full_name = 'Johnathan Doe'
+  WHERE user_id = 1;
+  ```
+
+- **Delete (Menghapus Pengguna):**
+  ```sql
+  DELETE FROM Users WHERE user_id = 1;
+  ```
+
+#### **2.2 CRUD pada Tabel Reports**
+
+- **Create (Menambahkan Laporan):**
+  ```sql
+  INSERT INTO Reports (user_id, title, description, status)
+  VALUES (1, 'Pothole on Main Street', 'There is a large pothole on Main Street that needs to be fixed.', 'Pending');
+  ```
+
+- **Read (Melihat Data Laporan):**
+  ```sql
+  SELECT * FROM Reports WHERE report_id = 1 AND deleted_at IS NULL;
+  ```
+
+- **Update (Mengubah Data Laporan):**
+  ```sql
+  UPDATE Reports 
+  SET status = 'In Progress', updated_at = CURRENT_TIMESTAMP
+  WHERE report_id = 1;
+  ```
+
+- **Delete (Menghapus Laporan - Soft Delete):**
+  ```sql
+  UPDATE Reports 
+  SET deleted_at = CURRENT_TIMESTAMP 
+  WHERE report_id = 1;
+  ```
+
+#### **2.3 CRUD pada Tabel ReportHistory**
+
+- **Create (Menambahkan Riwayat Perubahan Status):**
+  ```sql
+  INSERT INTO ReportHistory (report_id, status, changed_by)
+  VALUES (1, 'In Progress', 2);
+  ```
+
+- **Read (Melihat Riwayat Perubahan Status):**
+  ```sql
+  SELECT * FROM ReportHistory WHERE report_id = 1;
+  ```
+
+#### **2.4 CRUD pada Tabel RejectionRequests**
+
+- **Create (Menambahkan Permintaan Penolakan):**
+  ```sql
+  INSERT INTO RejectionRequests (report_id, requested_by, reason)
+  VALUES (1, 2, 'Laporan ini tidak valid karena tidak ada bukti yang jelas.');
+  ```
+
+- **Read (Melihat Data Permintaan Penolakan):**
+  ```sql
+  SELECT * FROM RejectionRequests WHERE request_id = 1;
+  ```
+
+- **Update (Mengubah Status Permintaan Penolakan):**
+  ```sql
+  UPDATE RejectionRequests 
+  SET status = 'Approved', updated_at = CURRENT_TIMESTAMP
+  WHERE request_id = 1;
+  ```
+
+#### **2.5 CRUD pada Tabel Responses**
+
+- **Create (Menambahkan Tanggapan):**
+  ```sql
+  INSERT INTO Responses (report_id, user_id, response_text)
+  VALUES (1, 2, 'Kami akan segera mengatasi masalah ini. Terima kasih atas laporannya.');
+  ```
+
+- **Read (Melihat Data Tanggapan):**
+  ```sql
+  SELECT * FROM Responses WHERE report_id = 1;
+  ```
+
+### 3. **Penjelasan**
+
+1. **Create (INSERT):** Digunakan untuk menambahkan data baru ke tabel. Misalnya, menambahkan pengguna baru, laporan baru, riwayat status baru, atau tanggapan baru.
+  
+2. **Read (SELECT):** Digunakan untuk membaca atau mengambil data dari tabel. Biasanya digunakan untuk menampilkan data pada UI aplikasi, seperti melihat detail laporan atau pengguna.
+
+3. **Update (UPDATE):** Digunakan untuk memperbarui data yang sudah ada di tabel. Misalnya, mengubah status laporan atau memperbarui detail pengguna.
+
+4. **Delete (DELETE/UPDATE untuk Soft Delete):** Digunakan untuk menghapus data dari tabel. Dalam konteks aplikasi ini, penghapusan laporan dilakukan dengan teknik soft delete, di mana data sebenarnya tidak dihapus dari database tetapi ditandai dengan `deleted_at`.
+
+Jika ada hal yang ingin ditambahkan atau disesuaikan, silakan beri tahu saya!

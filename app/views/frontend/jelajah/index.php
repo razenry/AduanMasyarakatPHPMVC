@@ -18,14 +18,16 @@
         </div>
         <div class="pb-20 lg:px-20 lg:pb-0">
             <!-- Formulir pencarian laporan -->
-            <div class="flex flex-col px-5 mb-5 lg:mb-10 lg:px-0" data-aos="zoom-in-up" data-aos-offset="-100">
-                <form class="flex items-center gap-x-5">
+            <div class="flex flex-col px-5 mb-10 lg:px-0" data-aos="zoom-in-up">
+                <!-- Instruksi pencarian laporan -->
+                <p class="mb-2">Cari laporan</p>
+                <form class="flex items-center gap-x-5" method="POST" action="<?= Routes::base('jelajah') ?>">
                     <!-- Label untuk input pencarian (tersembunyi) -->
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Cari Laporan!</label>
                     <!-- Input pencarian -->
-                    <input type="search" id="default-search" class="flex-grow p-4 text-xs font-semibold text-gray-900 uppercase border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500 lg:text-sm " placeholder="CONTOH : TGSL12345" required />
+                    <input type="search" name="judul" id="default-search" class="flex-grow p-4 text-xs font-semibold text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500 lg:text-sm" placeholder="" required />
                     <!-- Tombol pencarian -->
-                    <button type="submit" class="inline-flex items-center p-4 text-xs font-medium text-white bg-red-700 border border-red-700 rounded-lg hover:bg-red-800 lg:text-sm ">
+                    <button type="submit" name="cari" class="inline-flex items-center p-4 text-xs font-medium text-white bg-red-700 border border-red-700 rounded-lg lg:text-sm hover:bg-red-800 ">
                         <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
@@ -39,11 +41,12 @@
                     <div class="flex flex-wrap p-4 border-b border-slate-200">
                         <div class="mb-3 lg:w-full lg:mb-3">
                             <p class="text-base font-semibold">Semua Laporan</p>
-                            <p class="text-sm font-light text-gray-500">Terdapat total 112932 laporan yang telah diterima!</p>
+                            <p class="text-sm font-light text-gray-500">Terdapat total <?= $data['jml_laporan']['total'] ?> laporan yang telah diterima!</p>
                         </div>
+
                         <div class="w-full lg:justify-self-end">
-                            <form action="" method="GET" class="flex gap-5 lg:w-full">
-                                <select id="kecamatan" name="kecamatan" class="block w-full mb-5 text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50 focus:ring-transparent focus:border-gray-300">
+                            <form action="<?= Routes::base('jelajah') ?>" method="POST" class="flex gap-5 lg:w-full">
+                                <select id="kecamatan" name="kecamatan" class="block w-full text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50 focus:ring-transparent focus:border-gray-300 h-full py-4 px-3">
                                     <option value="Ciputat">Ciputat</option>
                                     <option value="Ciputat Timur">Ciputat Timur</option>
                                     <option value="Pondok Aren">Pondok Aren</option>
@@ -51,103 +54,45 @@
                                     <option value="Serpong Utara">Serpong Utara</option>
                                     <option value="Setu">Setu</option>
                                 </select>
-                                <select name="sort" id="sort" class="block text-sm text-gray-900 rounded-lg cursor-pointer bg-gray-50 focus:ring-transparent focus:border-gray-300 w-fit lg:w-1/3 h-fit">
-                                    <option selected="" value="">Terbaru</option>
-                                    <option value="">Terlama</option>
-                                </select>
+                                <button type="submit" name="filter" class="inline-flex items-center px-10 text-xs font-medium text-white bg-red-700 border border-red-700 rounded-lg hover:bg-red-800 lg:text-sm">
+                                    Filter
+                                </button>
                             </form>
                         </div>
+
+
                     </div>
                     <!-- list of all laporan -->
                     <div class="grid grid-cols-1 gap-5 p-4 rounded shadow-md lg:grid-cols-3">
                         <!-- Card 1 -->
-                        <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-full h-full">
-                                <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
-                            </div>
-                            <div class="flex flex-col flex-grow w-full">
-                                <h2 class="mt-1 text-lg font-bold text-red-600">TGSL12348</h2>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Kecamatan:
-                                    <span class="text-gray-500 ">Pamulang</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Deskripsi:
-                                    <span class="text-gray-500 description">Laporan Anda akan ditangani oleh pihak berwenang dan informasi Anda akan dirahasiakan. Kami akan merespons dan menangani laporan Anda dengan cepat dan akurat.</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Tanggal:
-                                    <span class="text-gray-500 ">04 Agustus 2024</span>
-                                </p>
-                            </div>
-                            <!-- Status di pojok kiri bawah -->
-                            <div class="flex justify-start w-full mt-auto">
-                                <span class="inline-block px-2 py-1 mt-1 text-xs font-medium text-white bg-gray-600 rounded-full">Status: Menunggu</span>
-                            </div>
-                        </a>
-                        <!-- Card 2 -->
-                        <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-full h-full">
-                                <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
-                            </div>
-                            <div class="flex flex-col flex-grow w-full">
-                                <h2 class="mt-1 text-lg font-bold text-red-600">TGSL12348</h2>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Kecamatan:
-                                    <span class="text-gray-500 ">Pamulang</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Deskripsi:
-                                    <span class="text-gray-500 description">Laporan Anda akan ditangani oleh pihak berwenang dan informasi Anda akan dirahasiakan. Kami akan merespons dan menangani laporan Anda dengan cepat dan akurat.</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Tanggal:
-                                    <span class="text-gray-500 ">04 Agustus 2024</span>
-                                </p>
-                            </div>
-                            <!-- Status di pojok kiri bawah -->
-                            <div class="flex justify-start w-full mt-auto">
-                                <span class="inline-block px-2 py-1 mt-1 text-xs font-medium text-white rounded-full bg-cyan-600">Status: Diverifikasi</span>
-                            </div>
-                        </a>
-                        <!-- Card 3 -->
-                        <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-full h-full">
-                                <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
-                            </div>
-                            <div class="flex flex-col flex-grow w-full">
-                                <h2 class="mt-1 text-lg font-bold text-red-600">TGSL12348</h2>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Kecamatan:
-                                    <span class="text-gray-500 ">Pamulang</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Deskripsi:
-                                    <span class="text-gray-500 description">Laporan Anda akan ditangani oleh pihak berwenang dan informasi Anda akan dirahasiakan. Kami akan merespons dan menangani laporan Anda dengan cepat dan akurat.</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Tanggal:
-                                    <span class="text-gray-500 ">04 Agustus 2024</span>
-                                </p>
-                            </div>
-                            <!-- Status di pojok kiri bawah -->
-                            <div class="flex justify-start w-full mt-auto">
-                                <span class="inline-block px-2 py-1 mt-1 text-xs font-medium text-white bg-yellow-600 rounded-full">Status: Dalam Tindakan</span>
-                            </div>
-                        </a>
-                        <!-- Card 4 -->
-                        <a href="" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                            <div class="flex justify-center w-full h-full">
-                                <img class="object-cover rounded-lg" src="https://via.placeholder.com/300" alt="Gambar Laporan">
-                            </div>
-                            <div class="flex flex-col flex-grow w-full">
-                                <h2 class="mt-1 text-lg font-bold text-red-600">TGSL12348</h2>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Kecamatan:
-                                    <span class="text-gray-500 ">Pamulang</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Deskripsi:
-                                    <span class="text-gray-500 description">Laporan Anda akan ditangani oleh pihak berwenang dan informasi Anda akan dirahasiakan. Kami akan merespons dan menangani laporan Anda dengan cepat dan akurat.</span>
-                                </p>
-                                <p class="mt-1 text-sm font-medium text-gray-900">Tanggal:
-                                    <span class="text-gray-500 ">04 Agustus 2024</span>
-                                </p>
-                            </div>
-                            <!-- Status di pojok kiri bawah -->
-                            <div class="flex justify-start w-full mt-auto">
-                                <span class="inline-block px-2 py-1 mt-1 text-xs font-medium text-white bg-green-600 rounded-full">Status: Tuntas</span>
-                            </div>
-                        </a>
+
+                        <?php foreach ($data['laporan'] as $key => $laporan) : ?>
+
+                            <a href="<?= Routes::base('detail/' . $laporan['slug']) ?>" class="relative flex flex-col items-center p-4 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
+                                <div class="flex justify-center w-full h-full">
+                                    <img class="object-cover rounded-lg" src="<?= Routes::storage("laporan/" . $laporan['fotos'][0]['foto']) ?>" alt="Gambar Laporan">
+                                </div>
+                                <div class="flex flex-col flex-grow w-full">
+                                    <h2 class="mt-1 text-lg font-bold text-gray-600"><?= $laporan['judul'] ?></h2>
+                                    <h5 class="mt-1 text-sm font-medium text-geay-600">Kode : <span class="mt-1 text-sm font-bold text-red-600"><?= $laporan['slug'] ?></span></h5>
+                                    <p class="mt-1 text-sm font-medium text-gray-900">Kecamatan:
+                                        <span class="text-gray-500 "><?= $laporan['kecamatan'] ?></span>
+                                    </p>
+                                    <p class="mt-1 text-sm font-medium text-gray-900">Deskripsi:
+                                        <span class="text-gray-500 description"><?= $laporan['isi_laporan'] ?></span>
+                                    </p>
+                                    <p class="mt-1 text-sm font-medium text-gray-900">Tanggal:
+                                        <span class="text-gray-500 "><?= DateHelper::formatIndonesianDate($laporan['tgl_laporan']) ?></span>
+                                    </p>
+                                </div>
+                                <!-- Status di pojok kiri bawah -->
+                                <div class="flex justify-start w-full mt-auto">
+                                    <?= StatusBadgeHelper::getStatusBadgeTail($laporan['status']) ?>
+                                </div>
+                            </a>
+
+                        <?php endforeach; ?>
+
                     </div>
                 </div>
             </div>

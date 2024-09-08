@@ -7,12 +7,12 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'lomba');
+define('DB_NAME', 'db_lomba');
 
 
 function adminUrl($path = '')
 {
-    $host = "http://localhost/Lomba-Oscar1.O-2024";
+    $host = "http://localhost/Lomba-Oscar1.O-2024/";
     $baseUrl = rtrim($host, '/') . '/' . ltrim($path, '/');
     return $baseUrl;
 }
@@ -52,3 +52,8 @@ function views($url = NULL)
         return $base_url;
     }
 }
+
+// Helper
+
+
+

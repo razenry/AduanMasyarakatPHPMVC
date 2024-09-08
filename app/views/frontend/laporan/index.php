@@ -28,26 +28,9 @@
                     <!-- Deskripsi -->
                     <p class="text-lg lg:text-base">Portal Layanan Pelaporan Online Kota Tangerang Selatan</p>
                 </div>
-                <!-- Formulir pencarian laporan -->
-                <div class="flex flex-col px-5 mb-10 lg:px-0">
-                    <!-- Instruksi pencarian laporan -->
-                    <p class="mb-2">Sudah pernah melaporkan? Cek kode laporan di sini.</p>
-                    <form class="flex items-center gap-x-5">
-                        <!-- Label untuk input pencarian (tersembunyi) -->
-                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Cari Laporan!</label>
-                        <!-- Input pencarian -->
-                        <input type="search" id="default-search" class="flex-grow p-4 text-xs font-semibold text-gray-900 uppercase border border-gray-300 rounded-lg bg-gray-50 focus:ring-red-500 focus:border-red-500 lg:text-sm" placeholder="CONTOH : TGSL12345" required />
-                        <!-- Tombol pencarian -->
-                        <button type="submit" class="inline-flex items-center p-4 text-xs font-medium text-white bg-red-700 border border-red-700 rounded-lg lg:text-sm hover:bg-red-800 ">
-                            <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            Cari Laporan!
-                        </button>
-                    </form>
-                </div>
+
                 <!-- Formulir untuk mengirim laporan -->
-                <form class="p-4 mx-5 bg-white rounded-md shadow-md lg:mx-0">
+                <form class="p-4 mx-5 bg-white rounded-md shadow-md lg:mx-0" action="<?= Routes::base("laporan/add") ?>" method="post" enctype="multipart/form-data">
                     <h2 class="text-xl text-center text-red-600 font-semibold my-5">Formulir Laporan</h2>
                     <!-- Label untuk lampiran laporan -->
                     <label class="block mb-2 font-medium text-gray-900 " for="file_input">Lampiran Laporan <span class="text-red-600">*</span></label>
@@ -58,13 +41,13 @@
                             <div x-ref="dnd"
                                 class="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:border-red-300 bg-gray-50 hover:bg-gray-100 ">
                                 <!-- Input file -->
-                                <input accept="image/jpeg, image/jpg, image/png" type="file" multiple
+                                <input accept="image/jpeg, image/jpg, image/png" name="foto[]" type="file" multiple
                                     class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                                     @change="addFiles($event)"
                                     @dragover="$refs.dnd.classList.add('border-red-300'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
                                     @dragleave="$refs.dnd.classList.remove('border-red-300'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
                                     @drop="$refs.dnd.classList.remove('border-red-300'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                                    title="" />
+                                    title="" required />
                                 <!-- Konten dropzone -->
                                 <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center">
                                     <svg class="w-12 h-12 mb-5 text-gray-500 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -140,12 +123,19 @@
                             </template>
                         </div>
                     </div>
+                    <!-- Bagian untuk memasukkan judul laporan -->
+                    <div class="mb-5" style="height: auto;">
+                        <!-- Label untuk textarea yang menjelaskan bahwa input ini wajib diisi -->
+                        <label for="judul" class="block mb-2 font-medium text-gray-900 ">Judul Laporan <span class="text-red-600">*</span></label>
+                        <!-- Textarea untuk menulis laporan dengan deskripsi yang harus jelas dan lengkap -->
+                        <input id="judul" name="judul" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 placeholder:text-xs placeholder:lg:text-sm" placeholder="Berikan judul laporan">
+                    </div>
                     <!-- Bagian untuk memasukkan isi laporan -->
                     <div class="mb-5" style="height: auto;">
                         <!-- Label untuk textarea yang menjelaskan bahwa input ini wajib diisi -->
                         <label for="message" class="block mb-2 font-medium text-gray-900 ">Isi Laporan <span class="text-red-600">*</span></label>
                         <!-- Textarea untuk menulis laporan dengan deskripsi yang harus jelas dan lengkap -->
-                        <textarea id="message" rows="4" style="height: 105px; resize: none;" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 placeholder:text-xs placeholder:lg:text-sm" placeholder="Tolong berikan deskripsi yang jelas dan lengkap tentang masalah atau keluhan Anda, termasuk lokasi atau alamat yang ingin dilaporkan. Informasi ini akan membantu kami memahami situasi Anda dengan lebih baik."></textarea>
+                        <textarea id="message" name="isi_laporan" rows="4" style="height: 105px; resize: none;" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 placeholder:text-xs placeholder:lg:text-sm" placeholder="Tolong berikan deskripsi yang jelas dan lengkap tentang masalah atau keluhan Anda, termasuk lokasi atau alamat yang ingin dilaporkan. Informasi ini akan membantu kami memahami situasi Anda dengan lebih baik."></textarea>
                     </div>
                     <!-- Bagian untuk memilih lokasi laporan -->
                     <div class="mb-5">
@@ -177,21 +167,22 @@
 
                                 <!-- Opsi untuk laporan anonim -->
                                 <div class="group">
-                                        <button class="group-hover:cursor-pointer" data-tooltip-target="tooltip-anonim" type="button">
-                                            <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent ">
-                                            <label for="default-radio-1" class=" text-sm font-medium text-gray-900 dark:text-gray-300">Anonim</label>
-                                        </button>
+                                    <button class="group-hover:cursor-pointer" data-tooltip-target="tooltip-anonim" type="button">
+                                        <input id="checkbox-anonim" type="checkbox" value="anonim" name="jenis_laporan" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent rounded-full appearance-none checked:bg-red-600 checked:border-transparent shadow-lg" onclick="toggleCheckbox('checkbox-anonim', 'checkbox-rahasia')">
+                                        <label for="checkbox-anonim" class="text-sm font-medium text-gray-900 dark:text-gray-300">Anonim</label>
+                                    </button>
                                     <!-- Tooltip untuk opsi anonim -->
                                     <div id="tooltip-anonim" role="tooltip" class="absolute z-10 invisible inline-block w-1/3 px-3 py-2 text-sm font-medium text-center text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
                                         Nama Anda tidak akan tercantum di laporan
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                 </div>
+
                                 <!-- Opsi untuk laporan rahasia -->
                                 <div class="group">
                                     <button class="group:hover:cursor-pointer" data-tooltip-target="tooltip-rahasia" type="button">
-                                        <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent ">
-                                        <label for="default-radio-2" class=" text-sm font-medium text-gray-900 dark:text-gray-300">Rahasia</label>
+                                        <input id="checkbox-rahasia" type="checkbox" value="rahasia" name="jenis_laporan" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-transparent rounded-full appearance-none checked:bg-red-600 checked:border-transparent shadow-lg" onclick="toggleCheckbox('checkbox-rahasia', 'checkbox-anonim')">
+                                        <label for="checkbox-rahasia" class="text-sm font-medium text-gray-900 dark:text-gray-300">Rahasia</label>
                                     </button>
                                     <!-- Tooltip untuk opsi rahasia -->
                                     <div id="tooltip-rahasia" role="tooltip" class="absolute z-10 invisible inline-block w-1/3 px-3 py-2 text-sm font-medium text-center text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
@@ -199,10 +190,17 @@
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                 </div>
+
+                                <!-- Link ke file JavaScript eksternal -->
+                                <script src="script.js"></script>
+
+
+
+
                             </div>
                         </div>
                         <!-- Tombol kirim -->
-                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Kirim</button>
+                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Kirim</button>
                     </div>
                 </form>
             </div>
@@ -520,4 +518,15 @@
             kelurahanSelect.setChoices(kelurahanList, 'value', 'label', true);
         });
     });
+</script>
+
+<script>
+    function toggleCheckbox(selected, other) {
+        var selectedCheckbox = document.getElementById(selected);
+        var otherCheckbox = document.getElementById(other);
+
+        if (selectedCheckbox.checked) {
+            otherCheckbox.checked = false;
+        }
+    }
 </script>

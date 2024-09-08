@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center justify-center">
         <!-- Logo dan nama aplikasi -->
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-            <img class="w-8 h-8 mr-2" src="<?= baseUrl('img/iconlogo.png') ?>" alt="logo">
+            <img class="w-8 h-8 mr-2" src="<?= Routes::public('img/iconlogo.png') ?>" alt="logo">
             WargaLapor
         </a>
         <!-- Kontainer untuk form pendaftaran -->
@@ -13,8 +13,10 @@
                     Pendaftaran Akun
                 </h1>
                 <!-- Form pendaftaran -->
-                <form class="space-y-4 md:space-y-6" action="#">
+                <form class="space-y-4 md:space-y-6" method="POST" action="<?= Routes::base('daftar/buatAkun') ?>">
                     <div>
+                        <input type="hidden" name="foto" value="">
+                        <input type="hidden" name="status" value="1">
                         <label for="nama" class="block mb-2 text-sm font-medium text-gray-900">Nama <span class="text-red-600">*</span></label>
                         <input type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="nama" required="">
                     </div>
@@ -23,8 +25,8 @@
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="nama@gmail.com" required="">
                     </div>
                     <div>
-                        <label for="noTlp" class="block mb-2 text-sm font-medium text-gray-900">Nomor Telepon <span class="text-gray-500">(Opsional)</span></label>
-                        <input type="text" name="noTlp" id="noTlp" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="08123456789">
+                        <label for="telp" class="block mb-2 text-sm font-medium text-gray-900">Nomor Telepon <span class="text-gray-500">(Opsional)</span></label>
+                        <input type="text" name="telp" id="telp" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5" placeholder="08123456789">
                     </div>
                     <!-- Input Kata Sandi -->
                     <div class="relative">
@@ -40,7 +42,7 @@
                     <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Daftar</button>
                     <!-- Tautan ke halaman login -->
                     <p class="text-sm font-light text-gray-500">
-                        Sudah memiliki akun?<a href="login" class="font-medium text-primary-600 hover:underline"> Masuk Sekarang!</a>
+                        Sudah memiliki akun?<a href="<?= Routes::base("masuk") ?>" class="font-medium text-primary-600 hover:underline"> Masuk Sekarang!</a>
                     </p>
                 </form>
             </div>

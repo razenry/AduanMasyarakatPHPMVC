@@ -7,7 +7,7 @@
             <!-- Bagian Logo -->
             <div class="flex items-center mb-6 md:mb-0">
                 <a href="" class="flex items-center">
-                    <img src="<?= baseUrl('img/iconlogo.png') ?>" class="h-10 mr-3" alt="Logo" />
+                    <img src="<?= Routes::public('img/iconlogo.png') ?>" class="h-10 mr-3" alt="Logo" />
                     <span class="self-center text-lg font-semibold text-gray-600 sm:text-2xl whitespace-nowrap">Warga<span class='text-primary-600'>Lapor!</span></span>
                 </a>
             </div>
@@ -22,7 +22,7 @@
                             <div class="Tangerang-Selatan">
                                 <button data-tooltip-target="Tangerang-Selatan" type="button" class="text-sm font-medium text-center text-white">
                                     <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                        <img src="<?= baseUrl('img/icontangsel.svg') ?>" alt="Tangerang Selatan" class="h-14 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <img src="<?= Routes::public('img/icontangsel.svg') ?>" alt="Tangerang Selatan" class="h-14 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <span class="sr-only">Tangerang Selatan</span>
                                     </a>
                                 </button>
@@ -36,7 +36,7 @@
                             <div class="Al-Amanah">
                                 <button data-tooltip-target="Al-Amanah" type="button" class="text-sm font-medium text-center text-white">
                                     <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                        <img src="<?= baseUrl('img/iconalamanah.png') ?>" alt="Al-Amanah" class="h-14 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <img src="<?= Routes::public('img/iconalamanah.png') ?>" alt="Al-Amanah" class="h-14 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <span class="sr-only">Al-Amanah</span>
                                     </a>
                                 </button>
@@ -59,7 +59,7 @@
                     <div class="facebook">
                         <button data-tooltip-target="facebook" type="button" class="text-sm font-medium text-center text-white">
                             <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                <img src="<?= baseUrl('img/facebook.png') ?>" alt="Facebook" class="w-10 h-10">
+                                <img src="<?= Routes::public('img/facebook.png') ?>" alt="Facebook" class="w-10 h-10">
                                 <span class="sr-only">Facebook</span>
                             </a>
                         </button>
@@ -73,7 +73,7 @@
                     <div class="twitter">
                         <button data-tooltip-target="twitter" type="button" class="text-sm font-medium text-center text-white">
                             <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                <img src="<?= baseUrl('img/icontwitter.png') ?>" alt="Twitter" class="w-10 h-10">
+                                <img src="<?= Routes::public('img/icontwitter.png') ?>" alt="Twitter" class="w-10 h-10">
                                 <span class="sr-only">Twitter</span>
                             </a>
                         </button>
@@ -87,7 +87,7 @@
                     <div class="instagram">
                         <button data-tooltip-target="instagram" type="button" class="text-sm font-medium text-center text-white">
                             <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                <img src="<?= baseUrl('img/instagram.png') ?>" alt="Instagram" class="w-10 h-10">
+                                <img src="<?= Routes::public('img/instagram.png') ?>" alt="Instagram" class="w-10 h-10">
                                 <span class="sr-only">Instagram</span>
                             </a>
                         </button>
@@ -111,7 +111,7 @@
                         <div class="Al-Amanah">
                             <button type="button" class="text-sm font-medium text-center text-white">
                                 <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                    <img src="<?= baseUrl('img/icongetongoogleplay.png') ?>" alt="Google Play" class="h-10 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <img src="<?= Routes::public('img/icongetongoogleplay.png') ?>" alt="Google Play" class="h-10 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <span class="sr-only">playstore</span>
                                 </a>
                             </button>
@@ -120,7 +120,7 @@
                         <div class="Tangerang-Selatan">
                             <button type="button" class="text-sm font-medium text-center text-white">
                                 <a href="#" class="text-gray-500 hover:text-gray-900 ">
-                                    <img src="<?= baseUrl('img/appstore.svg') ?>" alt="App Store" class="h-10 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <img src="<?= Routes::public('img/appstore.svg') ?>" alt="App Store" class="h-10 hover:text-gray-900 " viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <span class="sr-only">appstore</span>
                                 </a>
                             </button>

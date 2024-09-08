@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Icons -->
-  <link rel="icon" type="image/png" href="<?= baseUrl('img/iconlogo.png') ?>">
+  <link rel="icon" type="image/png" href="<?= Routes::public('img/iconlogo.png') ?>">
 
   <!-- Title -->
   <title>WargaLapor!</title>
@@ -37,7 +37,7 @@
 
 
   <!-- Link Custom CSS -->
-  <link rel="stylesheet" href="<?= baseUrl('css/style.css') ?>">
+  <link rel="stylesheet" href="<?= Routes::public('css/style.css') ?>">
 
 
   <!-- Konfigurasi Tailwind CSS -->

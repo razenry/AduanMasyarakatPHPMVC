@@ -2,65 +2,210 @@
 
 class User_model extends Database
 {
-    private $user = "users"; // Sesuaikan dengan nama tabel yang benar di database
+    private $pengguna = "pengguna"; // Nama tabel pengguna
+    private $petugas = "petugas"; // Nama tabel petugas
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Mendapatkan pengguna berdasarkan username.
-     *
-     * @param string $username Nama pengguna
-     * @return array|bool Data pengguna jika ditemukan, false jika tidak ditemukan
-     */
-    public function getUsers($username = "")
+    public function getPengguna($email = "")
     {
-        if ($username !== "") {
-            // Query untuk mendapatkan pengguna berdasarkan username
-            $this->query("SELECT * FROM $this->user WHERE username = :username");
-            $this->bind(':username', $username);
+        if ($email !== "") {
+            $this->query("SELECT * FROM $this->pengguna WHERE email = :email");
+            $this->bind(':email', $email);
             return $this->single();
         } else {
-            // Mengambil semua pengguna jika username tidak diberikan
-            $this->query("SELECT * FROM $this->user");
+            $this->query("SELECT * FROM $this->pengguna");
             return $this->resultSet();
         }
     }
 
-    public function getMotivation() {
-        // Array berisi kata-kata motivasi tentang programming
-        $motivations = array(
-            "Code is like humor. When you have to explain it, it’s bad.",
-            "Simplicity is the soul of efficiency.",
-            "The best way to predict the future is to invent it.",
-            "Talk is cheap. Show me the code.",
-            "Programming isn't about what you know; it's about what you can figure out.",
-            "First, solve the problem. Then, write the code.",
-            "Good code is its own best documentation.",
-            "Code never lies, comments sometimes do.",
-            "If you think your code is perfect, you’re not looking at it hard enough.",
-            "The only way to learn a new programming language is by writing programs in it.",
-            "The code you write makes you who you are.",
-            "Writing code is not just about making a machine do something; it’s about making yourself smarter.",
-            "Code quality is a reflection of the developer's attitude.",
-            "There are only two kinds of languages: the ones people complain about and the ones nobody uses.",
-            "Don’t worry if it doesn’t work right. If everything did, you’d be out of a job.",
-            "Software development is a continuous journey of learning and improvement.",
-            "Debugging is like being the detective in a crime movie where you are also the murderer.",
-            "Good programmers use their brains, not their butt.",
-            "The best code is no code at all.",
-            "Optimism is an occupational hazard of programming: feedback is the treatment.",
-            "Programming is not about typing, it's about thinking.",
-            "You might not think that programmers are artists, but programming is an extremely creative profession.",
-            "Code should be written to be read by humans first, and then executed by machines.",
-            "The sooner you start to code, the longer the program will take.",
-            "The greatest enemy of progress is not stagnation, but false progress."
-        );
-
-        // Pilih kata motivasi secara acak
-        return $motivations[array_rand($motivations)];
+    public function getPetugas($email = "")
+    {
+        if ($email !== "") {
+            $this->query("SELECT * FROM $this->petugas WHERE email = :email");
+            $this->bind(':email', $email);
+            return $this->single();
+        } else {
+            $this->query("SELECT * FROM $this->petugas");
+            return $this->resultSet();
+        }
     }
 
+    public function getPasswordByUserId($userId)
+    {
+        $this->query("SELECT password FROM pengguna WHERE id = :id");
+        $this->bind(':id', $userId);
+        return $this->single()['password'];
+    }
+
+    public function updatePassword($id, $hashedPassword)
+    {
+        $this->query("UPDATE pengguna SET password = :password WHERE id = :id");
+        $this->bind(':password', $hashedPassword);
+        $this->bind(':id', $id);
+
+        return $this->execute();
+    }
+
+
+    public function generateNip($type = "")
+    {
+        $this->query("SELECT nip FROM $this->pengguna ORDER BY nip DESC LIMIT 1");
+        $result = $this->single();
+
+        if ($result) {
+            $nip_db = $result['nip'];
+            $nip_db_parts = explode("TGSL", $nip_db);
+
+            if (isset($nip_db_parts[1])) {
+                $no_baru = (int)$nip_db_parts[1] + 1;
+            } else {
+                $no_baru = 1;
+            }
+
+            $nip_baru = "TGSL" . str_pad($no_baru, 7, "0", STR_PAD_LEFT);
+        } else {
+            $nip_baru = "TGSL0000001";
+        }
+
+        return $nip_baru;
+    }
+
+    public function countUsers()
+    {
+        $this->query("SELECT COUNT(*) AS total FROM $this->pengguna");
+        return $this->single();
+    }
+
+    public function countPetugas()
+    {
+        $this->query("SELECT COUNT(*) AS total FROM $this->petugas");
+        return $this->single();
+    }
+
+    public function isEmailExist($email)
+    {
+        $this->query("SELECT email FROM $this->pengguna WHERE email = :email");
+        $this->bind(':email', $email);
+        $userEmail = $this->single();
+
+        $this->query("SELECT email FROM $this->petugas WHERE email = :email");
+        $this->bind(':email', $email);
+        $petugasEmail = $this->single();
+
+        if (!empty($userEmail['email']) || !empty($petugasEmail['email'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getAllData($table)
+    {
+        $this->query("SELECT * FROM $table");
+        return $this->resultSet();
+    }
+
+    public function addData($data, $table)
+    {
+        if ($table == $this->pengguna) {
+            $this->query("INSERT INTO $table (nama, foto, email, password, telp, status) VALUES (:nama, :foto, :email, :password, :telp, :status)");
+
+            $this->bind(':nama', $data['nama']);
+            $this->bind(':foto', $data['foto']);
+            $this->bind(':email', $data['email']);
+            $this->bind(':password', $data['password'] ?? '');
+            $this->bind(':telp', $data['telp'] ?? '');
+            $this->bind(':status', $data['status'] ?? '1');
+
+            return $this->execute();
+        } elseif ($table == $this->petugas) {
+            $this->query("INSERT INTO $table (nama, foto, email, password, telp, status, level) VALUES (:nama, :foto, :email, :password, :telp, :status, :level)");
+
+            $this->bind(':nama', $data['nama']);
+            $this->bind(':foto', $data['foto']);
+            $this->bind(':email', $data['email']);
+            $this->bind(':password', $data['password'] ?? '');
+            $this->bind(':telp', $data['telp'] ?? '');
+            $this->bind(':status', $data['status'] ?? '');
+            $this->bind(':level', $data['level'] ?? '');
+
+            return $this->execute();
+        }
+    }
+
+    public function updateData($id, $data, $table)
+    {
+        if ($table == $this->pengguna) {
+            $this->query("UPDATE $table SET nama = :nama, foto = :foto, email = :email, password = :password, telp = :telp, status = :status WHERE id = :id");
+            $this->bind(':nama', $data['nama']);
+            $this->bind(':foto', $data['foto']);
+            $this->bind(':email', $data['email']);
+            $this->bind(':password', $data['password'] ?? '');
+            $this->bind(':telp', $data['telp'] ?? '');
+            $this->bind(':status', $data['status'] ?? '');
+            $this->bind(':id', $id);
+        } elseif ($table == $this->petugas) {
+            $this->query("UPDATE $table SET nama = :nama, foto = :foto, email = :email, password = :password, telp = :telp, status = :status, level = :level WHERE id = :id");
+            $this->bind(':nama', $data['nama']);
+            $this->bind(':foto', $data['foto']);
+            $this->bind(':email', $data['email']);
+            $this->bind(':password', $data['password'] ?? '');
+            $this->bind(':telp', $data['telp'] ?? '');
+            $this->bind(':status', $data['status'] ?? '');
+            $this->bind(':level', $data['level'] ?? '');
+            $this->bind(':id', $id);
+        }
+
+        return $this->execute();
+    }
+
+    public function updateProfile($id, $data)
+    {
+        $this->query("UPDATE pengguna SET nama = :nama, foto = :foto, email = :email, telp = :telp  WHERE id = :id");
+        $this->bind(':nama', $data['nama']);
+        $this->bind(':foto', $data['foto']);
+        $this->bind(':email', $data['email']);
+        $this->bind(':telp', $data['telp'] ?? '');
+        $this->bind(':id', $id);
+
+        return $this->execute();
+    }
+
+
+    public function getById($id, $table)
+    {
+        $this->query("SELECT * FROM $table WHERE id = :id");
+        $this->bind(':id', $id);
+        return $this->single();
+    }
+
+    public function deleteData($id, $table)
+    {
+        $users = $this->getById($id, $table);
+        if ($users && $users['foto']) {
+            $imagePath  = __DIR__ . "/../../public/storage/images/users/" . $users['foto'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $this->query("DELETE FROM $table WHERE id = :id");
+        $this->bind(':id', $id);
+
+        return $this->execute();
+    }
+
+    public function updateStatus($id, $status, $table)
+    {
+        $this->query("UPDATE $table SET status = :status WHERE id = :id");
+
+        $this->bind(':status', $status);
+        $this->bind(':id', $id);
+
+        return $this->execute();
+    }
 }

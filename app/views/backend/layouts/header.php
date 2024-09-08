@@ -4,32 +4,35 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+    <title><?= $data['title']; ?></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= baseUrl('assets/images/favicon.ico') ?>">
+    <link rel="shortcut icon" href="<?= Routes::base('img/logo/logoAdmin.png') ?>">
 
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/core/libs.min.css') ?>">
-
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/core/libs.min.css') ?>">
 
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/hope-ui.min.css?v=4.0.0') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/hope-ui.min.css?v=4.0.0') ?>">
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/custom.min.css?v=4.0.0') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/custom.min.css?v=4.0.0') ?>">
 
     <!-- Dark Css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/dark.min.css') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/dark.min.css') ?>">
 
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/customizer.min.css') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/customizer.min.css') ?>">
 
     <!-- RTL Css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/css/rtl.min.css') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/css/rtl.min.css') ?>">
 
     <!-- Flatpickr css -->
-    <link rel="stylesheet" href="<?= baseUrl('assets/vendor/flatpickr/dist/flatpickr.min.css') ?>">
+    <link rel="stylesheet" href="<?= Routes::public('assets/vendor/flatpickr/dist/flatpickr.min.css') ?>">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="<?= Routes::public('css/app.css') ?>">
+
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {

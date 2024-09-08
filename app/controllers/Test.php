@@ -4,6 +4,9 @@ class Test extends Controller
 {
     function index()
     {
+
+        die;
+
         $this->view("frontend/layouts/header");
         $this->view("frontend/layouts/navbar");
         $this->view("test/index");

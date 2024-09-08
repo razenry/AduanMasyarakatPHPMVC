@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center justify-center">
         <!-- Logo dan Nama Aplikasi -->
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-            <img class="w-8 h-8 mr-2" src="<?= baseUrl('img/iconlogo.png') ?>" alt="logo">
+            <img class="w-8 h-8 mr-2" src="<?= Routes::public('img/iconlogo.png') ?>" alt="logo">
             WargaLapor
         </a>
         <!-- Container Form Login -->
@@ -13,7 +13,7 @@
                     Yuk, Login ke Akun Kamu!
                 </h1>
                 <!-- Form Login -->
-                <form class="space-y-4 md:space-y-6" action="#">
+                <form class="space-y-4 md:space-y-6" method="POST" action="<?= Routes::base("masuk/auth") ?>">
                     <!-- Input Email -->
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
@@ -34,7 +34,7 @@
                     <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Masuk</button>
                     <!-- Tautan ke Halaman Daftar -->
                     <p class="text-sm font-light text-gray-500">
-                        Belum memiliki akun?<a href="register" class="font-medium text-primary-600 hover:underline"> Daftar Sekarang!</a>
+                        Belum memiliki akun?<a href="<?= Routes::base("daftar") ?>" class="font-medium text-primary-600 hover:underline"> Daftar Sekarang!</a>
                     </p>
                 </form>
             </div>

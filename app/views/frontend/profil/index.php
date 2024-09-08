@@ -1,3 +1,17 @@
+<?php
+
+// die(var_dump($data['user']));
+
+$pengguna = $data['user'];
+$id = $pengguna['id'];
+$nama = $pengguna['nama'];
+$foto = $pengguna['foto'];
+$email = $pengguna['email'];
+$password = $pengguna['password'];
+$telp = $pengguna['telp'];
+$status = $pengguna['status'];
+
+?>
 <main class="bg-gray-100 rounded-md lg:py-20 lg:px-20 ">
     <section>
         <div class="p-5 lg:p-0" data-aos="zoom-in-up">
@@ -20,8 +34,23 @@
 
             <div class="col-span-12">
                 <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-md 2xl:col-span-2 dark:border-gray-700 lg:p-6 dark:bg-gray-800">
+
+                    <?php if (isset($_SESSION['berhasil'])) : ?>
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-green-200 dark:text-green-900" role="alert">
+                            <?= $_SESSION['berhasil']; ?>
+                        </div>
+                        <?php unset($_SESSION['berhasil']); ?>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['gagal'])) : ?>
+                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 dark:bg-red-200 dark:text-red-900" role="alert">
+                            <?= $_SESSION['gagal']; ?>
+                        </div>
+                        <?php unset($_SESSION['gagal']); ?>
+                    <?php endif; ?>
+
                     <h3 class="mb-4 text-xl font-semibold dark:text-white">Informasi Umum</h3>
-                    <form action="#">
+                    <form action="<?= Routes::base("user/editProfil") ?>" method="POST" enctype="multipart/form-data">
                         <div class="grid grid-cols-6 gap-6">
                             <!-- Label untuk Profil -->
                             <div class="col-span-6">
@@ -30,15 +59,22 @@
                                 <div x-data="dataFileDnD()" class="relative flex flex-col text-gray-400 rounded">
                                     <div class="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-normal">
                                         <!-- Area dropzone -->
-                                        <div x-ref="dnd"
-                                            class="relative flex items-center justify-center w-40 h-40 rounded-full shadow-md bg-gray-50 hover:bg-gray-100"
-                                            style="background-image: url('<?= baseUrl('img/complain.png'); ?>'); background-size: cover; background-position: center;">
-                                        </div>
+                                        <?php if ($foto == "default-user.png") : ?>
+                                            <div x-ref="dnd"
+                                                class="relative flex items-center justify-center w-40 h-40 rounded-full shadow-md bg-gray-50 hover:bg-gray-100"
+                                                style="background-image: url('<?= Routes::storage() . "users/default/default-user.png" ?>'); background-size: cover; background-position: center;">
+                                            </div>
+                                        <?php else : ?>
+                                            <div x-ref="dnd"
+                                                class="relative flex items-center justify-center w-40 h-40 rounded-full shadow-md bg-gray-50 hover:bg-gray-100"
+                                                style="background-image: url('<?= Routes::storage('users/' . $foto); ?>'); background-size: cover; background-position: center;">
+                                            </div>
+                                        <?php endif; ?>
 
                                         <div class="flex flex-col items-center lg:items-start">
                                             <!-- Tombol Ubah Foto Profil -->
                                             <button @click="$refs.fileInput.click()" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 w-fit mb-2" type="button">Ubah Foto Profil</button>
-                                            <input x-ref="fileInput" accept="image/jpeg, image/jpg, image/png" type="file" class="hidden" @change="addFiles($event)">
+                                            <input x-ref="fileInput" accept="image/jpeg, image/jpg, image/png" type="file" name="foto" class="hidden" @change="addFiles($event)">
                                             <!-- Pesan jenis file -->
                                             <p class="text-sm text-center lg:text-left">Format yang didukung: JPEG, JPG, atau PNG.</p>
                                         </div>
@@ -50,7 +86,7 @@
                                         <div class="relative flex flex-col w-1/2 p-4 bg-white rounded h-1/2">
                                             <!-- Gambar untuk crop -->
                                             <div class="relative flex-grow w-full h-full">
-                                                <img id="image-to-crop" src="<?= baseUrl('img/complain.png') ?>" alt="Image to crop" class="object-cover w-full h-full">
+                                                <img id="image-to-crop" src="<?= Routes::storage('users/' . $foto); ?>" alt="Image to crop" class="object-cover w-full h-full">
                                             </div>
                                             <!-- Kontrol modal berada di bawah gambar -->
                                             <div class="p-4 mt-4 rounded">
@@ -66,16 +102,16 @@
 
                             <!-- Form Input -->
                             <div class="col-span-6 lg:col-span-3">
-                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                                <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Edo Priyatna" required>
+                                <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                                <input type="text" name="nama" id="nama" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= $nama ?>" placeholder="Edo Priyatna" required>
                             </div>
                             <div class="col-span-6 lg:col-span-3">
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nama@gmail.com" required>
+                                <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= $email ?>" placeholder="nama@gmail.com" required>
                             </div>
                             <div class="col-span-6 lg:col-span-3">
-                                <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon</label>
-                                <input type="text" name="phone-number" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="08123456789" required>
+                                <label for="telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telepon</label>
+                                <input type="text" name="telp" id="telp" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="<?= $telp ?>" placeholder="08123456789" required>
                             </div>
                             <div class="col-span-6 lg:col-full">
                                 <button class="text-white bg-primary-700 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Simpan</button>
@@ -138,7 +174,7 @@
                 </div>
                 <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-md 2xl:col-span-2 dark:border-gray-700 lg:p-6 dark:bg-gray-800">
                     <h3 class="mb-4 text-xl font-semibold dark:text-white">Ubah Kata Sandi</h3>
-                    <form action="#">
+                    <form action="<?= Routes::base('user/ubahPassword') ?>" method="post">
                         <div class="grid grid-cols-6 gap-6">
                             <!-- Input Kata Sandi Lama -->
                             <div class="relative col-span-6 lg:col-span-3">
@@ -181,6 +217,8 @@
         </div>
     </section>
 </main>
+
+
 
 <!-- Script untuk tombol tampilkan password -->
 <script>
